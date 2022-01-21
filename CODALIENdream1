@@ -1,0 +1,99 @@
+#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+ 
+// A tree node
+class Node 
+{
+public:
+    int data;
+    Node *left, *right;
+ 
+    /* Constructor that allocates a new
+    node with the given data and NULL
+    left and right pointers. */
+    Node(int data)
+    {
+        this->data = data;
+        this->left = NULL;
+        this->right = NULL;
+    }
+};
+
+Node* NewRoot = NULL;
+Node* root = new Node(100);
+ 
+// Returns maximum value in a given Binary Tree
+int findMax(Node* root)
+{
+    // Base case
+    if (root == NULL)
+        return INT_MIN;
+ 
+    // Return maximum of 3 values:
+    // 1) Root's data 2) Max in Left Subtree
+    // 3) Max in right subtree
+    int res = root->data;
+    int lres = findMax(root->left);
+    int rres = findMax(root->right);
+    if (lres > res)
+        res = lres;
+    if (rres > res)
+        res = rres;
+    return res;
+}
+ 
+
+struct Node* search(int data){
+   struct Node *current = root;
+	
+   while(current->data != data){
+	
+      if(current != NULL) {
+         printf("%d ",current->data);
+			
+         //go to left tree
+         if(current->data > data){
+            current = current->left;
+         }//else go to right tree
+         else {                
+            current = current->right;
+         }
+			
+         //not found
+         if(current == NULL){
+            return NULL;
+         }
+      }			
+   }
+   return current;
+}
+
+// Driver Code
+int main()
+{
+    root->left = new Node(101);
+    root->right = new Node(33);
+    root->left->right = new Node(43);
+    root->left->right->left = new Node(62);
+    root->left->right->right = new Node(80);
+    root->right->right = new Node(72);
+    root->right->left = new Node(180);
+    root->right->right->left = new Node(67);
+    root->right->right->right = new Node(69);
+    root->right->right->right->left = new Node(34);
+    root->right->right->right->right = new Node(190);
+    root->right->right->left->right = new Node(523);
+    root->right->right->left->left = new Node(23);
+    root->left->right->right->left = new Node(19);
+    root->left->right->right->right = new Node(1900);
+    
+    
+ 
+    // Function call
+    int data=findMax(root);
+    search(data);
+    
+    
+    return 0;
+}
